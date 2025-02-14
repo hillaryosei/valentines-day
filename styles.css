@@ -121,33 +121,45 @@ input[type="password"] {
     color: white;
 }
 
-/* Letter Popup - Now Fully Responsive */
+/* Letter Popup - Fixed Size, No Extra Scrolling */
 #letter-content {
-    width: 90%; /* Adjust width dynamically */
-    max-width: 400px; /* Prevents it from being too large */
-    height: 70vh; /* Responsive height */
-    max-height: 500px; /* Ensures it fits in smaller screens */
+    width: 90%;
+    max-width: 400px;
+    height: 70vh;
     background: #FFF;
     border: 3px solid #D87093;
     padding: 15px;
     text-align: center;
     font-size: 18px;
     color: black;
-    overflow-y: auto; /* Enables scrolling if needed */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Keeps button at the bottom */
     border-radius: 8px;
 }
 
-/* Ensure proper spacing for text inside the letter */
+/* Letter Text - Scrollable Content Only */
 #letter-text {
-    text-align: left;
-    max-height: 100%;
-    overflow-y: auto;
+    max-height: 60vh;
+    overflow-y: auto; /* Allows scrolling inside only this section */
     padding: 10px;
 }
 
-/* Buttons inside the letter */
+/* "¿Terminaste de leer?" Button - Always Visible */
 #done-reading-btn {
     width: 80%;
     max-width: 250px;
-    margin-top: 15px;
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #FF85A2;
+    border: 3px solid #D87093;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+    transition: 0.2s ease-in-out;
+}
+
+#done-reading-btn:hover {
+    background-color: #D87093;
 }
