@@ -15,44 +15,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
     document.addEventListener("DOMContentLoaded", () => {
         const bgMusic = document.getElementById("bg-music");
+        const pingSound = document.getElementById("ping-sound");
 
-        /* Try playing music immediately */
-        function tryPlayMusic() {
-            bgMusic.volume = 0; // Start muted
-            bgMusic.play().then(() => {
-                console.log("Music started successfully!");
-                fadeInMusic();
-            }).catch(() => {
-                console.log("Autoplay blocked. Waiting for user interaction...");
-                document.addEventListener("click", playOnInteraction, { once: true });
-                document.addEventListener("touchstart", playOnInteraction, { once: true });
-            });
+        function playMusicOnInteraction() {
+            bgMusic.play().catch(err => console.log("Error playing music:", err));
+            document.removeEventListener("click", playMusicOnInteraction);
+            document.removeEventListener("touchstart", playMusicOnInteraction);
         }
 
-        /* Fade in music gradually */
-        function fadeInMusic() {
-            let volume = 0;
-            bgMusic.muted = false; // Unmute
-            const fadeInterval = setInterval(() => {
-                if (volume < 1) {
-                    volume += 0.1;
-                    bgMusic.volume = volume.toFixed(1);
-                } else {
-                    clearInterval(fadeInterval);
-                }
-            }, 300); // Increases volume every 300ms
-        }
-
-        /* Play music if user interacts */
-        function playOnInteraction() {
-            bgMusic.muted = false;
-            bgMusic.play().then(() => {
-                console.log("Music playing after user interaction.");
-                fadeInMusic();
-            }).catch(err => console.log("Error playing music:", err));
-        }
-
-        tryPlayMusic();
+        // If autoplay fails, wait for user interaction (click/tap)
+        document.addEventListener("click", playMusicOnInteraction);
+        document.addEventListener("touchstart", playMusicOnInteraction);
     });
 
     passwordInput.addEventListener("keypress", (event) => {
