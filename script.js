@@ -13,19 +13,28 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = document.getElementById("bg-music");
     const pingSound = document.getElementById("ping-sound");
 
-    // Remove duplicate event listeners & correctly preload music
-    function playMusicOnInteraction() {
-        bgMusic.play().catch(err => console.log("Error playing music:", err));
-        document.removeEventListener("click", playMusicOnInteraction);
-        document.removeEventListener("touchstart", playMusicOnInteraction);
+    async function tryPlayMusic() {
+        try {
+            console.log("Attempting to play music...");
+            await bgMusic.play();
+            console.log("Music started successfully!");
+        } catch (error) {
+            console.log("Autoplay blocked or error occurred:", error);
+            document.addEventListener("click", playOnInteraction, { once: true });
+            document.addEventListener("touchstart", playOnInteraction, { once: true });
+        }
     }
 
-    // Ensure music preloads & plays when possible
-    bgMusic.load();
+    function playOnInteraction() {
+        console.log("User clicked, trying to play music...");
+        bgMusic.play().then(() => {
+            console.log("Music playing after user interaction.");
+        }).catch(error => console.log("Error playing music:", error));
+    }
 
-    // If autoplay fails, wait for user interaction (click/tap)
-    document.addEventListener("click", playMusicOnInteraction);
-    document.addEventListener("touchstart", playMusicOnInteraction);
+    // Ensures the audio is preloaded before attempting to play
+    bgMusic.load();
+    tryPlayMusic();
 
     // Password Entry Logic
     passwordInput.addEventListener("keypress", (event) => {
@@ -64,7 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         passwordInput.value = "";
     });
 
-    // Floating Hearts Animation
+    // ✅ Floating Hearts Animation
     function createHearts() {
         const heartContainer = document.getElementById("heart-container");
 
