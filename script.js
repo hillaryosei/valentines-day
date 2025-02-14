@@ -13,9 +13,24 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = document.getElementById("bg-music");
     const pingSound = document.getElementById("ping-sound");
 
-    bgMusic.volume = 0;
-    bgMusic.play().then(() => {
-    setTimeout(() => bgMusic.volume = 1, 1000); // Fades in after 1 second
+document.addEventListener("DOMContentLoaded", () => {
+    const bgMusic = document.getElementById("bg-music");
+
+    /* Attempt to autoplay music */
+    function playMusic() {
+        bgMusic.play().catch(() => {
+            console.log("Autoplay blocked, waiting for user interaction...");
+            document.addEventListener("click", enableMusicOnInteraction);
+        });
+    }
+
+    /* If autoplay is blocked, play on first user interaction */
+    function enableMusicOnInteraction() {
+        bgMusic.play();
+        document.removeEventListener("click", enableMusicOnInteraction);
+    }
+
+    playMusic();
 });
 
     passwordInput.addEventListener("keypress", (event) => {
