@@ -3,13 +3,12 @@ body {
     font-family: 'Pixelify Sans', sans-serif;
     background-color: #FFA6C9;
     text-align: center;
-    overflow: hidden; /* Prevent page scrolling */
+    overflow: hidden;
     position: relative;
 }
 h1 {
     color: white;
 }
-
 /* Buttons */
 button {
     font-family: 'Pixelify Sans', sans-serif;
@@ -26,7 +25,6 @@ button {
 button:hover {
     background-color: #D87093;
 }
-
 /* Hearts Floating */
 @keyframes floatHearts {
     0% { transform: translateY(100vh) translateX(0); opacity: 1; }
@@ -50,7 +48,6 @@ button:hover {
     background-size: contain;
     animation: floatHearts 5s infinite linear;
 }
-
 /* General Layout */
 .screen {
     display: flex;
@@ -62,7 +59,6 @@ button:hover {
 .hidden {
     display: none;
 }
-
 input[type="password"] {
     font-size: 24px;
     text-align: center;
@@ -70,7 +66,6 @@ input[type="password"] {
     background-color: rgba(255, 166, 201, 0.5);
     color: #D87093;
 }
-
 .hint {
     font-size: 14px;
     color: white;
@@ -78,7 +73,6 @@ input[type="password"] {
 .error-msg {
     color: white;
 }
-
 /* Popups */
 .popup {
     position: fixed;
@@ -92,7 +86,6 @@ input[type="password"] {
     font-size: 18px;
     z-index: 10;
 }
-
 /* Envelope Image */
 #envelope-image {
     width: 250px;
@@ -103,7 +96,6 @@ input[type="password"] {
 .envelope-text {
     color: white;
 }
-
 #gatito-image {
     width: 150px;
     height: auto;
@@ -111,8 +103,7 @@ input[type="password"] {
 .finish-text {
     color: white;
 }
-
-/* Letter Popup - Fixing Scrolling Issue */
+/* Letter Popup - Now Fully Responsive */
 #letter-content {
     width: 90%; /* Adjust width dynamically */
     max-width: 400px; /* Prevents it from being too large */
@@ -124,42 +115,19 @@ input[type="password"] {
     text-align: center;
     font-size: 18px;
     color: black;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between; /* Keeps button at the bottom */
+    overflow-y: auto; /* Enables scrolling if needed */
     border-radius: 8px;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 20;
-    overflow: hidden; /* Prevent scrolling on the entire popup */
 }
-
-/* Letter Text scrolls */
+/* Ensure proper spacing for text inside the letter */
 #letter-text {
     text-align: left;
-    max-height: 55vh; /* Prevents overflow */
-    overflow-y: auto; /* Only this part is scrollable */
+    max-height: 100%;
+    overflow-y: auto;
     padding: 10px;
-    flex-grow: 1; /* Allows letter content to take up space without pushing the button down */
 }
-
-/* "¿Terminaste de leer?" Button stays Fixed Inside Popup */
+/* Buttons inside the letter */
 #done-reading-btn {
     width: 80%;
     max-width: 250px;
-    padding: 10px;
-    background-color: #FF85A2;
-    border: 3px solid #D87093;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 8px;
-    transition: 0.2s ease-in-out;
-    align-self: center;
-    margin-top: 10px;
-}
-#done-reading-btn:hover {
-    background-color: #D87093;
+    margin-top: 15px;
 }
