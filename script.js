@@ -16,10 +16,13 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = document.getElementById("bg-music");
 
-    /* Try playing music immediately */
-    function tryPlayMusic() {
-        bgMusic.play().catch(() => {
-            console.log("Autoplay blocked, waiting for user interaction...");
+    /* Ensure autoplay works */
+    function startMusic() {
+        bgMusic.muted = false; // Unmute audio
+        bgMusic.play().then(() => {
+            console.log("Music started successfully!");
+        }).catch(() => {
+            console.log("Autoplay blocked. Waiting for user interaction...");
             document.addEventListener("click", playOnInteraction, { once: true });
             document.addEventListener("touchstart", playOnInteraction, { once: true });
         });
@@ -27,12 +30,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /* Play music on first user interaction */
     function playOnInteraction() {
+        bgMusic.muted = false; // Unmute before playing
         bgMusic.play().then(() => {
             console.log("Music playing after user interaction.");
         }).catch(err => console.log("Error playing music:", err));
     }
 
-    tryPlayMusic();
+    startMusic();
 });
 
     passwordInput.addEventListener("keypress", (event) => {
