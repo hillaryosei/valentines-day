@@ -13,31 +13,47 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = document.getElementById("bg-music");
     const pingSound = document.getElementById("ping-sound");
 
-document.addEventListener("DOMContentLoaded", () => {
-    const bgMusic = document.getElementById("bg-music");
+    document.addEventListener("DOMContentLoaded", () => {
+        const bgMusic = document.getElementById("bg-music");
 
-    /* Ensure autoplay works */
-    function startMusic() {
-        bgMusic.muted = false; // Unmute audio
-        bgMusic.play().then(() => {
-            console.log("Music started successfully!");
-        }).catch(() => {
-            console.log("Autoplay blocked. Waiting for user interaction...");
-            document.addEventListener("click", playOnInteraction, { once: true });
-            document.addEventListener("touchstart", playOnInteraction, { once: true });
-        });
-    }
+        /* Try playing music immediately */
+        function tryPlayMusic() {
+            bgMusic.volume = 0; // Start muted
+            bgMusic.play().then(() => {
+                console.log("Music started successfully!");
+                fadeInMusic();
+            }).catch(() => {
+                console.log("Autoplay blocked. Waiting for user interaction...");
+                document.addEventListener("click", playOnInteraction, { once: true });
+                document.addEventListener("touchstart", playOnInteraction, { once: true });
+            });
+        }
 
-    /* Play music on first user interaction */
-    function playOnInteraction() {
-        bgMusic.muted = false; // Unmute before playing
-        bgMusic.play().then(() => {
-            console.log("Music playing after user interaction.");
-        }).catch(err => console.log("Error playing music:", err));
-    }
+        /* Fade in music gradually */
+        function fadeInMusic() {
+            let volume = 0;
+            bgMusic.muted = false; // Unmute
+            const fadeInterval = setInterval(() => {
+                if (volume < 1) {
+                    volume += 0.1;
+                    bgMusic.volume = volume.toFixed(1);
+                } else {
+                    clearInterval(fadeInterval);
+                }
+            }, 300); // Increases volume every 300ms
+        }
 
-    startMusic();
-});
+        /* Play music if user interacts */
+        function playOnInteraction() {
+            bgMusic.muted = false;
+            bgMusic.play().then(() => {
+                console.log("Music playing after user interaction.");
+                fadeInMusic();
+            }).catch(err => console.log("Error playing music:", err));
+        }
+
+        tryPlayMusic();
+    });
 
     passwordInput.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
