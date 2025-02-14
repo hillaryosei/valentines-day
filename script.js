@@ -13,7 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = document.getElementById("bg-music");
     const pingSound = document.getElementById("ping-sound");
 
-    bgMusic.play();
+    bgMusic.volume = 0;
+    bgMusic.play().then(() => {
+    setTimeout(() => bgMusic.volume = 1, 1000); // Fades in after 1 second
+});
 
     passwordInput.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
