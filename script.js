@@ -16,21 +16,23 @@ document.addEventListener("DOMContentLoaded", () => {
 document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = document.getElementById("bg-music");
 
-    /* Attempt to autoplay music */
-    function playMusic() {
+    /* Try playing music immediately */
+    function tryPlayMusic() {
         bgMusic.play().catch(() => {
             console.log("Autoplay blocked, waiting for user interaction...");
-            document.addEventListener("click", enableMusicOnInteraction);
+            document.addEventListener("click", playOnInteraction, { once: true });
+            document.addEventListener("touchstart", playOnInteraction, { once: true });
         });
     }
 
-    /* If autoplay is blocked, play on first user interaction */
-    function enableMusicOnInteraction() {
-        bgMusic.play();
-        document.removeEventListener("click", enableMusicOnInteraction);
+    /* Play music on first user interaction */
+    function playOnInteraction() {
+        bgMusic.play().then(() => {
+            console.log("Music playing after user interaction.");
+        }).catch(err => console.log("Error playing music:", err));
     }
 
-    playMusic();
+    tryPlayMusic();
 });
 
     passwordInput.addEventListener("keypress", (event) => {
