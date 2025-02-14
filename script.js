@@ -13,21 +13,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const bgMusic = document.getElementById("bg-music");
     const pingSound = document.getElementById("ping-sound");
 
-    document.addEventListener("DOMContentLoaded", () => {
-        const bgMusic = document.getElementById("bg-music");
-        const pingSound = document.getElementById("ping-sound");
+    // Remove duplicate event listeners & correctly preload music
+    function playMusicOnInteraction() {
+        bgMusic.play().catch(err => console.log("Error playing music:", err));
+        document.removeEventListener("click", playMusicOnInteraction);
+        document.removeEventListener("touchstart", playMusicOnInteraction);
+    }
 
-        function playMusicOnInteraction() {
-            bgMusic.play().catch(err => console.log("Error playing music:", err));
-            document.removeEventListener("click", playMusicOnInteraction);
-            document.removeEventListener("touchstart", playMusicOnInteraction);
-        }
+    // Ensure music preloads & plays when possible
+    bgMusic.load();
 
-        // If autoplay fails, wait for user interaction (click/tap)
-        document.addEventListener("click", playMusicOnInteraction);
-        document.addEventListener("touchstart", playMusicOnInteraction);
-    });
+    // If autoplay fails, wait for user interaction (click/tap)
+    document.addEventListener("click", playMusicOnInteraction);
+    document.addEventListener("touchstart", playMusicOnInteraction);
 
+    // Password Entry Logic
     passwordInput.addEventListener("keypress", (event) => {
         if (event.key === "Enter") {
             const password = passwordInput.value;
@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", () => {
         passwordInput.value = "";
     });
 
-    /* Generate Floating Hearts */
+    // Floating Hearts Animation
     function createHearts() {
         const heartContainer = document.getElementById("heart-container");
 
