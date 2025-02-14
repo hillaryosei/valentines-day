@@ -3,10 +3,9 @@ body {
     font-family: 'Pixelify Sans', sans-serif;
     background-color: #FFA6C9;
     text-align: center;
-    overflow: hidden;
+    overflow: hidden; /* Prevent page scrolling */
     position: relative;
 }
-
 h1 {
     color: white;
 }
@@ -24,7 +23,6 @@ button {
     margin-top: 10px;
     transition: 0.2s ease-in-out;
 }
-
 button:hover {
     background-color: #D87093;
 }
@@ -35,7 +33,6 @@ button:hover {
     50% { opacity: 0.8; }
     100% { transform: translateY(-10vh) translateX(10px); opacity: 0; }
 }
-
 #heart-container {
     position: fixed;
     top: 0;
@@ -45,7 +42,6 @@ button:hover {
     pointer-events: none;
     overflow: hidden;
 }
-
 .pixel-heart {
     position: absolute;
     width: 20px;
@@ -63,7 +59,6 @@ button:hover {
     justify-content: center;
     height: 100vh;
 }
-
 .hidden {
     display: none;
 }
@@ -80,7 +75,6 @@ input[type="password"] {
     font-size: 14px;
     color: white;
 }
-
 .error-msg {
     color: white;
 }
@@ -106,26 +100,24 @@ input[type="password"] {
     cursor: pointer;
     margin-top: 20px;
 }
-
 .envelope-text {
     color: white;
 }
-
 
 #gatito-image {
     width: 150px;
     height: auto;
 }
-
 .finish-text {
     color: white;
 }
 
-/* Letter Popup - Fixed Size, No Extra Scrolling */
+/* Letter Popup - Fixing Scrolling Issue */
 #letter-content {
-    width: 90%;
-    max-width: 400px;
-    height: 70vh;
+    width: 90%; /* Adjust width dynamically */
+    max-width: 400px; /* Prevents it from being too large */
+    height: 70vh; /* Responsive height */
+    max-height: 500px; /* Ensures it fits in smaller screens */
     background: #FFF;
     border: 3px solid #D87093;
     padding: 15px;
@@ -136,20 +128,27 @@ input[type="password"] {
     flex-direction: column;
     justify-content: space-between; /* Keeps button at the bottom */
     border-radius: 8px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 20;
+    overflow: hidden; /* Prevent scrolling on the entire popup */
 }
 
-/* Letter Text - Scrollable Content Only */
+/* Letter Text scrolls */
 #letter-text {
-    max-height: 60vh;
-    overflow-y: auto; /* Allows scrolling inside only this section */
+    text-align: left;
+    max-height: 55vh; /* Prevents overflow */
+    overflow-y: auto; /* Only this part is scrollable */
     padding: 10px;
+    flex-grow: 1; /* Allows letter content to take up space without pushing the button down */
 }
 
-/* "¿Terminaste de leer?" Button - Always Visible */
+/* "¿Terminaste de leer?" Button stays Fixed Inside Popup */
 #done-reading-btn {
     width: 80%;
     max-width: 250px;
-    margin-top: 10px;
     padding: 10px;
     background-color: #FF85A2;
     border: 3px solid #D87093;
@@ -158,8 +157,9 @@ input[type="password"] {
     cursor: pointer;
     border-radius: 8px;
     transition: 0.2s ease-in-out;
+    align-self: center;
+    margin-top: 10px;
 }
-
 #done-reading-btn:hover {
     background-color: #D87093;
 }
