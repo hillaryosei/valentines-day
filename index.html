@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>regalo para ti!</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+</head>
+<body>
+    <audio id="bg-music" loop>
+        <source src="dreaming-of-you-music-box.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- Background Hearts -->
+    <div id="heart-container"></div>
+
+    <div id="login-screen" class="screen">
+        <h1>ingresa la contraseña</h1>
+        <input type="password" id="password-input" maxlength="4" placeholder="****">
+        <p class="hint">pista: es tu cumpleaños</p>
+    </div>
+    
+    <div id="error-popup" class="popup hidden">
+        <p class="error-msg"> error :( vuelve a intentar</p>
+        <button id="retry-btn">oki</button>
+    </div>
+
+    <div id="letter-screen" class="screen hidden">
+        <h1 id="email-text">tienes un correo!</h1>
+        <audio id="ping-sound">
+            <source src="ping.mp3" type="audio/mpeg">
+        </audio>
+        <p class="envelope-text">haz clic para leer</p>
+        <img id="envelope-image" src="envelope.png" alt="sobre con sello de corazón">
+    </div>
+
+    <div id="letter-content" class="popup hidden">
+        <div id="letter-text">
+            <p>Querido Brando,</p>
+            <p>No sé cómo agradecerte lo suficiente por estar conmigo. Desde que entraste en mi vida, cada día se ha sentido más especial. Con cada mensaje, cada videollamada, iluminas mi mundo de una manera que ni siquiera puedes imaginar. Haces que todo sea más bonito, más llevadero, y aunque estemos lejos por ahora, te siento cerca en cada palabra, en cada risa compartida. Significas mucho para mí.</p>
+            <p>No puedo esperar a que llegue mayo para poder ver tu hermosa cara en persona. Imaginar el momento en que finalmente pueda besarte y abrazarte me llena de emoción. Va a ser nuestro momento, y cada segundo juntos lo voy a atesorar. Quiero darte todo el amor que tengo guardado para ti, porque te lo mereces todo y más.</p>
+            <p>Siempre te voy a amar, Brando. Siempre estaré aquí para ti, en lo bueno y en lo malo, para apoyarte, para levantarte, para recordarte lo increíble que eres. Siempre te elegiré, pase lo que pase, porque te amo más que a nada. No hay nada que quiera más que verte feliz. Gracias por ser tú.</p>
+            <p>No hay nadie como tú. Eres mi felicidad. Te amo con todo mi corazón, hoy y siempre.</p>
+            <p>Con amor,<br>Afia 🥰</p>
+        </div>
+        <button id="done-reading-btn">terminaste de leer?</button>
+    </div>
+
+    <div id="finish-reading-popup" class="popup hidden">
+        <p class="finish-text">feliz día de san valentín amorcito <3, te amo mucho xoxo</p>
+        <img id="gatito-image" src="paratimibida.jpg" alt="foto de un gatito sosteniendo flores con el texto 'para ti mi bida'"></br>
+        <button id="restart-btn">volver a empezar</button>
+    </div>
+</body>
+</html>
